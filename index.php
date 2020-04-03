@@ -6,8 +6,8 @@
 <body>
 	<ul>
 		<li><a href="Formulario.html">Formulario</li>
-		<li><a href="#">Modulo 1</li>
-		<li><a href="#">Modulo 2</li>
+		<li><a href="./personas/PersonasControlador.php?operacion=index.php">personas</a> </li>
+		<li><a href="#">Modulo 3</li>
 	</ul>
 </body>
 </html>
