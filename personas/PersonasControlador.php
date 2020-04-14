@@ -5,6 +5,9 @@ extract($_REQUEST);
 class PersonasControlador
 {
 	public function index(){
+
+
+
 		$db=new clasedb();
 		$conex=$db->conectar();
 
@@ -22,12 +25,12 @@ class PersonasControlador
 			}
 			$i++;
 		}
-		mysqli_close($conex);
-			header("Location: index.php?filas=".$filas."&campos=".$campos."&data=".serialize($datos));
-	}
+	 mysqli_close($conex);
+		header("Location: index.php?filas=".$filas."&campos=".$campos."&data=".serialize($datos));
+	}//fin de la funcion index
 
-
-	static function controlador($operacion){
+     static function controlador ($operacion)
+     {
 		$persona=new PersonasControlador();
 	switch ($operacion) {
 		case 'index':
@@ -37,7 +40,7 @@ class PersonasControlador
 			$persona->registrar();
 			break;
 		case 'guardar':
-			$persona->modificar();
+			$persona->guardar();
 			break;
 		case 'modificar':
 			$persona->modificar();
@@ -46,6 +49,7 @@ class PersonasControlador
 			$persona->actualizar();
 			break;
 		case 'eliminar':
+		     //persona->eliminar();
 			$persona->eliminar();
 			break;
 		default:
@@ -58,5 +62,55 @@ class PersonasControlador
 			break;
 	}//fin del switch
 }//fin del controlador
-}//fin de la clase
-PersonasControlador::controlador($operacion);
+
+	public function modificar() 
+	  {
+	   extract($_REQUEST);//extrayendo valores de url
+	   $db=new clasedb();
+	   $conex=$db->conectar();//conectando con la base de datos
+
+	   $sql="SELECT * FROM datos_personales WHERE id=".$id_persona."";
+	   $res=mysqli_query($conex,$sql);//ejecutando consulta
+	   $data=mysqli_fetch_array($res);//extrayendo datos en array
+	   header("Location: editar.php?data=".serialize($data));
+	  }//Fin de la funcion modificar
+
+	  public function actualizar()
+	{
+      extract($_POST);//extrayendo variables del formulario
+	  $db=new clasedb();
+	  $conex=$db->conectar();//conectando con la base de datos
+
+	  $sql="SELECT * FROM datos_personales WHERE dni=".$dni."AND id<>".$id_persona;
+	//echo $sql;
+	$res=mysqli_query($conex,$sql);
+	$cant=mysqli_num_rows($res);//trae los registros de la consulta
+		if ($cant>0) {
+		?>
+		   <script type="text/javascript">
+		      alert("DNI Ya Registrado");			        	   	
+		      window.location="PersonasControlador.php?operacion=index";			       
+		   </script>	   	 	   
+		<?php			        	   
+	}else{
+
+	$sql="UPDATE datos_personales SET first_name='".$first_name."',last_name='".$last_name."',dni=".$dni." WHERE id=".$id_persona;
+		$res=mysqli_query($conex,$sql);}
+		    if ($res) {
+		    	?>
+		    	 <script type="text/javascript">
+		    	 	alert("Registro Modificado");
+		    	 	window.location="PersonasControlador.php?operacion=index";
+		    	 </script>
+		    	<?php
+		    } else {
+		    	?> 
+		    	 <script type="text/javascript">
+		    	 	alert("Error Al Modificar Registro");
+		    	 	window.location="PersonasControlador.php?operacion=index";
+		    	 </script>
+		    	<?php
+		      }
+       }//fin de la funcion actualizar
+   }//fin de la clase
+{PersonasControlador::controlador($operacion);}
