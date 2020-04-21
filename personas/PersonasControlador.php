@@ -5,9 +5,6 @@ extract($_REQUEST);
 class PersonasControlador
 {
 	public function index(){
-
-
-
 		$db=new clasedb();
 		$conex=$db->conectar();
 
@@ -29,7 +26,7 @@ class PersonasControlador
 		header("Location: index.php?filas=".$filas."&campos=".$campos."&data=".serialize($datos));
 	}//fin de la funcion index
 
-     static function controlador ($operacion)
+   static function controlador ($operacion)
      {
 		$persona=new PersonasControlador();
 	switch ($operacion) {
@@ -49,7 +46,6 @@ class PersonasControlador
 			$persona->actualizar();
 			break;
 		case 'eliminar':
-		     //persona->eliminar();
 			$persona->eliminar();
 			break;
 		default:
@@ -112,5 +108,75 @@ class PersonasControlador
 		    	<?php
 		      }
        }//fin de la funcion actualizar
+       public function eliminar()
+       {
+       	extract($_REQUEST);//extrayendo variables del url
+       	$db=new clasedb();
+       	$conex=$db->conectar();//conectando la base de datos
+
+       	$sql="DELETE FROM datos_personales WHERE id=".$id_persona;
+
+       	  $res=mysqli_query($conex,$sql);
+       	  if ($res) {
+       	   	?> 
+       	   	   <script type="text/javascript">
+       	   	   	alert("Registro Eliminado");
+       	   	   	window.location="PersonasControlador.php?operacion=index";
+       	   	   </script>
+       	   	<?php
+       	   } else {
+       	   	?>
+       	   	   <script type="text/javascript">
+       	   	   	alert("Registro No Eliminado");
+       	   	   	window.location="PersonasControlador.php?operacion=index";
+       	   	   </script>
+       	   	<?php
+       	   }
+       }//fin de la funcion eliminar
+       public function registrar()
+       {
+       	header("location: registrar.php");
+       }//fin de registrar
+       
+       public function guardar(){
+       	extract($_POST);//extrayendo variables del formulario 
+       	$db=new clasedb();
+       	$conex=$db->conectar();//conectado con la base de datos
+
+       	$sql="SELECT * FROM datos_personales WHERE dni=".$dni."";
+       	$res=mysqli_query($conex,$sql);
+       	$cuantos=mysqli_num_rows($res);
+       	if ($cuantos>0) {
+       		?> <script type="text/javascript">
+       			alert("La Cedula Ya Existe");
+       			window.location="PersonasControlador.php?operacion=registrar";
+       		</script>
+       		<?php
+       	} else {
+       		$sql="INSERT INTO datos_personales(first name,last name,dni) VALUES ('".$nombres."','".$apellidos."',".$dni.")";
+       		$result=mysqli_query($conex,$sql);
+       		if ($result) {
+       			?>
+       			<script type="text/javascript">
+       				if (confirm("Registro Existoso, Desea Resgitrar Otro")) {
+       					window.location="PersonasControlador.php?operacion=index";
+       				}else{
+       					window.location="PersonasControlador.php?operacion=index";
+       				}
+       			</script>
+       			<?php
+       		} else {
+       			?> 
+       			<script type="text/javascript">
+       				if (confirm("Registro Fallido, Desea Volver A Intentarlo")){
+       					window.location="PersonasControlador.php?operacion=index";
+       				} else {
+       					window.location="PersonasControlador.php?operacion=index";
+       				}
+       			</script>
+       			<?php
+       		}
+       	 }//cierre del else de $result = true 
+       }//fin de la funcion guardar
    }//fin de la clase
 {PersonasControlador::controlador($operacion);}
