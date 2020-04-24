@@ -4,11 +4,11 @@ $data=unserialize($data);
 ?><!DOCTYPE html>
 <html>
 <head>
-	<title>Lista de Categorias</title>
+	<title>Lista de Personas</title>
 <script type="text/javascript">
 	function eliminar(id) {
-		if (confirm("Seguro desea eliminar el registro?")) {
-			window.location="/PersonasControlador.php?operacion=eliminar&id_persona="+id;
+		if (confirm("Seguro Desea Eliminar El Registro?")) {
+			window.location="PersonasControlador.php?operacion=eliminar&id_persona="+id;
 		}
 	}
 </script>
