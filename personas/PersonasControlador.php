@@ -26,6 +26,7 @@ class PersonasControlador
 		header("Location: index.php?filas=".$filas."&campos=".$campos."&data=".serialize($datos));
 	}//fin de la funcion index
 
+<<<<<<< HEAD
    
 
     public function registrar()
@@ -150,6 +151,9 @@ class PersonasControlador
        	   }
        }//fin de la funcion eliminar
        static function controlador ($operacion)
+=======
+   static function controlador ($operacion)
+>>>>>>> 3d76a178d24821055b46b0a84e5ab54aac4fa3b0
      {
 		$persona=new PersonasControlador();
 	switch ($operacion) {
@@ -180,6 +184,132 @@ class PersonasControlador
 			<?php
 			break;
 	}//fin del switch
+<<<<<<< HEAD
 }//fin del controlador 
+=======
+}//fin del controlador
+
+    public function registrar()
+       {
+       	header("location: registrar.php");
+       }//fin de registrar
+
+       public function guardar(){
+       	extract($_POST);//extrayendo variables del formulario 
+       	$db=new clasedb();
+       	$conex=$db->conectar();//conectado con la base de datos
+
+       	$sql="SELECT * FROM datos_personales WHERE dni=".$dni."";
+       	$res=mysqli_query($conex,$sql);
+       	$cuantos=mysqli_num_rows($res);
+       	if ($cuantos>0) {
+       		?> <script type="text/javascript">
+       			alert("La Cedula Ya Existe");
+       			window.location="PersonasControlador.php?operacion=registrar";
+       		</script>
+       		<?php
+       	} else {
+       		$sql="INSERT INTO datos_personales(first name,last name,dni) VALUES ('".$nombres."','".$apellidos."',".$dni.")";
+       		$result=mysqli_query($conex,$sql);
+       		if ($result) {
+       			?>
+       			<script type="text/javascript">
+       				if (confirm("Registro Existoso, Desea Resgitrar Otro")) {
+       					window.location="PersonasControlador.php?operacion=index";
+       				}else{
+       					window.location="PersonasControlador.php?operacion=index";
+       				}
+       			</script>
+       			<?php
+       		} else {
+       			?> 
+       			<script type="text/javascript">
+       				if (confirm("Registro Fallido, Desea Volver A Intentarlo")){
+       					window.location="PersonasControlador.php?operacion=index";
+       				} else {
+       					window.location="PersonasControlador.php?operacion=index";
+       				}
+       			</script>
+       			<?php
+       		}
+       	 }//cierre del else de $result = true 
+       }//fin de la funcion guardar
+
+	public function modificar() 
+	  {
+	   extract($_REQUEST);//extrayendo valores de url
+	   $db=new clasedb();
+	   $conex=$db->conectar();//conectando con la base de datos
+
+	   $sql="SELECT * FROM datos_personales WHERE id=".$id_persona."";
+	   $res=mysqli_query($conex,$sql);//ejecutando consulta
+	   $data=mysqli_fetch_array($res);//extrayendo datos en array
+	   header("Location: editar.php?data=".serialize($data));
+	  }//Fin de la funcion modificar
+
+	  public function actualizar()
+	{
+      extract($_POST);//extrayendo variables del formulario
+	  $db=new clasedb();
+	  $conex=$db->conectar();//conectando con la base de datos
+
+	  $sql="SELECT * FROM datos_personales WHERE dni=".$dni."AND id<>".$id_persona;
+	//echo $sql;
+	$res=mysqli_query($conex,$sql);
+	$cant=mysqli_num_rows($res);//trae los registros de la consulta
+		if ($cant>0) {
+		?>
+		   <script type="text/javascript">
+		      alert("DNI Ya Registrado");			        	   	
+		      window.location="PersonasControlador.php?operacion=index";			       
+		   </script>	   	 	   
+		<?php			        	   
+	}else{
+
+	$sql="UPDATE datos_personales SET first_name='".$first_name."',last_name='".$last_name."',dni=".$dni." WHERE id=".$id_persona;
+		$res=mysqli_query($conex,$sql);}
+		    if ($res) {
+		    	?>
+		    	 <script type="text/javascript">
+		    	 	alert("Registro Modificado");
+		    	 	window.location="PersonasControlador.php?operacion=index";
+		    	 </script>
+		    	<?php
+		    } else {
+		    	?> 
+		    	 <script type="text/javascript">
+		    	 	alert("Error Al Modificar Registro");
+		    	 	window.location="PersonasControlador.php?operacion=index";
+		    	 </script>
+		    	<?php
+		      }
+       }//fin de la funcion actualizar
+
+       public function eliminar()
+       {
+       	extract($_REQUEST);//extrayendo variables del url
+       	$db=new clasedb();
+       	$conex=$db->conectar();//conectando la base de datos
+
+       	$sql="DELETE FROM datos_personales WHERE id=".$id_persona;
+
+       	  $res=mysqli_query($conex,$sql);
+       	  if ($res) {
+       	   	?> 
+       	   	   <script type="text/javascript">
+       	   	   	alert("Registro Eliminado");
+       	   	   	window.location="PersonasControlador.php?operacion=index";
+       	   	   </script>
+       	   	<?php
+       	   } else {
+       	   	?>
+       	   	   <script type="text/javascript">
+       	   	   	alert("Registro No Eliminado");
+       	   	   	window.location="PersonasControlador.php?operacion=index";
+       	   	   </script>
+       	   	<?php
+       	   }
+       }//fin de la funcion eliminar 
+>>>>>>> 3d76a178d24821055b46b0a84e5ab54aac4fa3b0
    }//fin de la clase
 {PersonasControlador::controlador($operacion);}
