@@ -1,0 +1,31 @@
+Índex: es el inicio de la función y para insertar la información seleccionada desde una base de datos.
+
+Clasedb:  esto es una instancia de la clase para crear un objeto, por eso se usa la palabra new
+Cuando se asigna una instancia de clase ya creada a una nueva variable, la nueva variable accederá a esa misma instancia.
+
+Conectar: es para conectar con la base de datos.
+
+SQL: es la consulta para la clase.
+
+Res: ejecuta la consulta de la variable $Conex y $sql.
+
+Campos: La usamos para obtener el número de campos de un resultado que en este caso es ($res).
+
+Filas: Se usa para recuperar el número de filas de un conjunto de resultados.
+
+$i: es el nombre que le damos a una variable que se puede definir y usar dinámicamente.
+
+Datos: Es un tipo de array que tiene índices numéricos y se accede con un número entero a cada valor del mismo.
+
+While: Lo utilizamos para ejecutar un pedazo del código, mientras la condición siga siendo verdadera, y con la variable mysqli_fetch_array haría que esta me trajera datos con el bucle. 
+
+For: Establecemos el valor inicial de la variable de control definida en la asignación inicial, si el resultado es true se ejecuta el bloque de sentencias, se efectúa el cambio de la variable de control y se evalúa nuevamente la condición de continuación; si el resultado es false el bucle se termina.
+Datos y data: se está utilizando para guardar los datos del bucle For.
+
+$i++: Es una variable que nos ayuda a hacer incrementos o decrementos en la función.
+
+Mysqli_close:  Cierra una conexión abierta previamente a base de datos.
+
+Header lo usamos para enviar encabezados sin formato, de esta manera se redirige al usuario más rápido a la página.
+
+Y las // significan comentarios y las llave al final significa que ya termino la función.
