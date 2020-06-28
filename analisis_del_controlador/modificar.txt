@@ -1,0 +1,15 @@
+public funcion modificar: Es el inicio de la funcion.
+
+extract:  Importar variables a la tabla de símbolos actual desde un array y con el atributo ($_REQUEST) almacena la informacion requerida en la matriz
+
+Clasedb:  esto es una instancia de la clase para crear un objeto, por eso se usa la palabra new
+Cuando se asigna una instancia de clase ya creada a una nueva variable, la nueva variable accederá a esa misma instancia.
+
+Conectar: es para conectar con la base de datos.
+
+SQL: es la consulta para la clase.
+
+Res: ejecuta la consulta de la variable $Conex y $sql.
+
+Header lo usamos para enviar encabezados sin formato, de esta manera se redirige al usuario más rápido a la página.
+ 

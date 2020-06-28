@@ -1,0 +1,56 @@
+public function actualizar: inicio de la funcion.
+
+extract:  Importar variables a la tabla de símbolos actual desde un array junto con la variable post se guardan las variables.
+ 
+Clasedb:  esto es una instancia de la clase para crear un objeto, por eso se usa la palabra new
+Cuando se asigna una instancia de clase ya creada a una nueva variable, la nueva variable accederá a esa misma instancia.
+
+Conectar: es para conectar con la base de datos.
+
+SQL: es la consulta para la clase.
+
+Res: ejecuta la consulta de la variable $Conex y $sql.
+
+If $cant: lo usamos para crear una sentencia condicional.
+
+script type: se utiliza para determinar un contenido que tiene un valor unico.
+
+alert: es lo que nos indica un mensaje puesto por el programador que le indica al usuario que ya esta registrado.
+
+window.location: nos indica donde esta ubica el archivo.
+
+script:nos ayuda a controlar el comportamiento del programa.
+
+else: se usa para saber si la condicion es falsa o verdadera.
+
+SQL UPDATE: La sentencia UPDATE se utiliza para modificar valores en una tabla, 
+La cláusula SET establece los nuevos valores para las columnas indicadas, 
+La cláusula WHERE sirve para seleccionar las filas que queremos modificar.
+
+Res: ejecuta la consulta de la variable $Conex y $sql.
+
+If $res: aqui se esta colocando un if con una variable definida.
+
+script type: se utiliza para determinar un contenido que tiene un valor unico.
+
+alert: es un mensaje que le indica al usuario que ya esta modifica su registros.
+
+window.location: nos indica donde esta ubica el archivo.
+
+script:nos ayuda a controlar el comportamiento del programa.
+
+else: se usa para saber si la condicion es falsa o verdadera.
+
+?>: se usa para determinar una variable no definida.
+
+script type: se utiliza para determinar un contenido que tiene un valor unico.
+
+alert: le esta indicando al usuario que tiene un error al modificar su registro.
+
+window.location: nos indica donde esta ubica el archivo.
+
+script:nos ayuda a controlar el comportamiento del programa.
+
+<?php: se usa para determinar una variable no definida.
+
+{}: las llaves las usamos para indicar el inicio y el fin de la funcion.
